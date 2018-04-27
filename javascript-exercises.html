@@ -32,14 +32,24 @@
 		<li id="basic4"></li>
 		<li id="basic5"></li>
 		<li id="basic6">
-			<input type="text" id='basic6input'></input>
-			<button onClick='basic6()'>Check</button>
-			<div id='basic6result'></div>
+			<input type="text" id="basic6input" placeholder="input a year"></input>
+			<button onClick="basic6()">Check</button>
+			<span id="basic6result"></span>
 			</li>
 		<li id="basic7"></li>
-		<li id="basic8"></li>
+		<li id="basic8">
+			<input type="text" id="basic8input" placeholder="guess the number!"></input>
+			<button onClick="basic8()">Check</button>
+			<span id="basic8result"></span>
+			</li>
 		<li id="basic9"></li>
-		<li id="basic10"></li>
+		<li id="basic10">
+			<input type="number" id="basic10input1" placeholder="A"></input>
+			<input type="number" id="basic10input2" placeholder="B"></input>
+			<button onClick="basic10('multiply')">Multiply</button>
+			<button onClick="basic10('divide')">Divide</button>
+			<span id="basic10result"></span>
+			</li>
 		<li id="basic11"></li>
 		
 	</ol>
@@ -54,6 +64,9 @@
 	$("#basic3").html(basic3());
 	$("#basic4").html(basic4(5,6,7));
 	$("#basic5").html(basic5("w3resources"));
+	$("#basic7").html(basic7());
+	$("#basic9").html(basic9());
+	$("#basic10").html(basic10());
 	
 	
 	function basic1(){
@@ -113,17 +126,80 @@
 	}
 	
 	function basic6(){
-		var result;
-		var text = /^[0-9]+$/;
 		var input = $("#basic6input").val();
-		if(input != 0){
-			if ((input != "") && (!text.test(input))){
-				result = "Please enter numberic only";
+		var patt = new RegExp("^[0-9]{4}");
+		var res = patt.test(input);
+		var response = "";
+		if(res == true){
+			if(input % 4 == 0){
+				if(input % 100 != 0){
+					response = "leap year!";
+				}else if(input % 100 == 0){
+					if(input % 400 != 0){
+						response = "not a leap year.";
+					} else if (input % 400 == 0){
+						response = "leap year!";
+					}
+				}
+			} else {
+				response = "not a leap year!"
 			}
+		} else if (res == false){
+			response = "please enter a valid year.";
 		}
-		$("#basic6result").val(result);
+		$("#basic6result").html(response);
+		
+	}
+	
+	function basic7(){
+		var result = "";
+		var firstYear = 2014;
+		var lastYear = 2050;
+		var dateCase = new Date(firstYear,00,01);
+		
+		while(dateCase.getFullYear()<=lastYear){
+			if(dateCase.getDay() == 0){
+				return dateCase.toISOString();
+				break
+			}
+			dateCase.setFullYear(dateCase.getFullYear()+1);			
+		}
+	}
+	
+	function basic8(){
+		var input = $("#basic8input").val();
+		var number = Math.floor((Math.random() * 10) + 1);
+		console.log("Excercise #8 - The number is " + number);
+		if (input == number){
+			$("#basic8result").html("Great job!");
+		} else {
+			$("#basic8result").html("No dice! try again!");
+		}
 	}
 
+	function basic9(){
+		var today = new Date();
+		var thisYear = today.getFullYear();
+		var christmas = new Date(thisYear,11,25);
+		var diff =  Math.floor(( Date.parse(christmas) - Date.parse(today) ) / 86400000); 
+		var result = "There are " + diff + " days until Christmas.";
+		return result;
+	}
+	
+	function basic10(type){
+		var result = "";
+		var a = $("#basic10input1").val();
+		var b = $("#basic10input2").val();
+		if(type == "multiply"){
+			result = a * b;
+		} else if (type == "divide"){
+			result = a / b;
+		}
+		$("#basic10result").html(result);
+	}
+	
+	function basic11(){
+	}
 
 </script>
 </html>
