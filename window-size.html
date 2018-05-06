@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+
+	
+	<style>
+	
+	</style>
+
+	<title>
+		page dimension experiment
+	</title>
+
+</head>
+
+<body>
+
+
+</body>
+
+<script>
+
+$(document).ready(function(){
+		
+		var width = Math.floor(Math.random() * 1000);
+		var height = Math.floor(Math.random() * 1000);
+		var javadimens = "Dimensions set by Javascript: " + width + "," + height;
+		window.resizeTo(width, height);
+		
+		var jquerywidth = $(window).width();
+		var jqueryheight = $(window).height();
+		var jquerydimens = "jQuery Dimensions: " + jquerywidth + "," + jqueryheight;
+		
+		var widthdiff = width - jquerywidth;
+		var heightdiff = height - jqueryheight;
+		var diff = "Difference: " + widthdiff + "," + heightdiff;
+		console.log(javadimens);
+		console.log(jquerydimens);
+		console.log(diff);
+	
+});
+
+
+</script>
+</html>

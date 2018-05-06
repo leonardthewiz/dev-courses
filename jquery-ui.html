@@ -8,16 +8,21 @@
 	<link rel="stylesheet" href="reset.css">
 	
 	<style>
-	.buttonContainer{
-		width:300px;
-	}
-	
 	body{
 		font-family:Arial, Helvetica, sans-serif;
 	}
-	
+
+	.buttonContainer{
+		width:300px;
+	}
+	#main{
+		text-align:center;
+
+	}
 	.mainItem{
 		height:100%;
+		padding:0px;\
+		margin:0px;
 		resize:none;
 	}
 	
@@ -31,13 +36,6 @@
 		margin:0 auto;
 		padding:5px;
 		width:300px;
-	}
-	
-	#navBarLogo{		
-		float:left;
-		font-weight:bold;
-		font-size:120%;
-		padding:5px;
 	}
 	
 	.navBarButton{
@@ -54,6 +52,13 @@
 	.navBarButtonHover{
 		background-color:grey;
 	}
+
+	#navBarLogo{		
+		float:left;
+		font-weight:bold;
+		font-size:120%;
+		padding:5px;
+	}
 	
 	#navBar-HTML{
 		border-top-left-radius:4px;
@@ -64,6 +69,9 @@
 		border-top-right-radius:4px;
 		border-bottom-right-radius:4px;
 		border-right:1px solid grey;
+	}
+	iframe{
+		border:1px solid black;
 	}
 	
 	</style>
@@ -86,9 +94,9 @@
 		</div>
 	</div>
 	<div id="main">
-		<textarea class="mainItem" id="main-HTML">HTML here</textarea>
-		<textarea class="mainItem" id="main-CSS">CSS here</textarea>
-		<textarea class="mainItem" id="main-Javascript">JS here</textarea>
+		<textarea class="mainItem" id="main-HTML"><h1>Heading</h1><p>Here's a paragraph!</p></textarea>
+		<textarea class="mainItem" id="main-CSS">h1{background-color:green;}</textarea>
+		<textarea class="mainItem" id="main-Javascript">alert("hi");</textarea>
 		<iframe class="mainItem" id="main-Output">Output here</iframe>
 	</div>
 
@@ -96,7 +104,36 @@
 
 <script>
 
+	function showViewport() {
+		var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+		var height= Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+	}
+	
+	function setMainDimens(){
+		var visibleItems = $('.mainItem:visible').length;
+		var windowWidth = $(window).width() - 17;
+		console.log(windowWidth);
+		var marginWidth = 2;
+		var borderWidth = $(".mainItem").css("borderWidth");
+		var itemWidth = (windowWidth/visibleItems) - (marginWidth * visibleItems) - (borderWidth * visibleItems * 2);
+		
+		$(".mainItem").width(itemWidth);
+		$(".mainItem").css("margin-left",marginWidth+"px");
+		$(".mainItem").css("margin-right",marginWidth+"px");
+		$(".mainItem").css("margin-top",marginWidth+"px");
+		$(".mainItem").height($(window).height() - $("#navBar").height() - 45);
+	}
+	
+	function updateOutput(){
+		var iframeContent = "<html><head><style>" + $("#main-CSS").val() + "</style></head><body>" + $("#main-HTML").val() + "</body></html>";
+		$("#main-Output").contents().find("html").html(iframeContent);
+		document.getElementById("main-Output").contentWindow.eval($("#main-Javascript").val());
+	}
+
 	$(document).ready(function(){
+		setMainDimens();
+		showViewport();
+		updateOutput();
 
 		$(".navBarButton").hover(function(){
 			$(this).addClass("navBarButtonHover");
@@ -105,7 +142,6 @@
 		});
 		
 		$(".navBarButton").click(function(){
-			$(".navBarButtonActive").removeClass("navBarButtonActive");
 			$(this).toggleClass("navBarButtonActive");
 			$(this).removeClass("navBarButtonHover");
 			var clickedID = $(this).attr("id");
@@ -119,16 +155,12 @@
 			} else if (clickedID == "navBar-Output"){
 				$("#main-Output").toggle();
 			}
-
-			var mainItemVisible = $('.mainItem:visible').length;		
-						//var setWidth = $(window).width();
-			//$(".mainItem").
-		});		
+			setMainDimens();
+			updateOutput();
+		});
 		
-		$(".mainItem").height($(window).height() - $("#navBar").height() - 45);		
-		
-		$("textarea").on('change keyup paste',function(){
-			$("#main-Output").contents().find("html").html($("#main-HTML").val());
+		$("textarea").on('change keyup paste', function(){
+			updateOutput();
 		});
 	});
 

@@ -13,7 +13,7 @@
 	}
 	</style>
 
-	<!--https://www.w3resource.com/javascript-exercises/javascript-basic-exercises.php-->
+	<!--https://www.w3resource.com/javascript-exercises/javascript-ex-exercises.php-->
 	<title>
 		Javascript Tutorials
 	</title>
@@ -22,35 +22,48 @@
 
 <body>
 
-	<h1>Basic</h1>
+	<h1>ex</h1>
 	<ol>
-		<li id="basic1"></li>
-		<li id="basic2">
-			<button onClick='basic2()'>Print this Window</button>"
+		<li id="ex1"></li>
+		<li id="ex2">
+			<button onClick='ex2()'>Print this Window</button>
 			</li>
-		<li id="basic3"></li>
-		<li id="basic4"></li>
-		<li id="basic5"></li>
-		<li id="basic6">
-			<input type="text" id="basic6input" placeholder="input a year"></input>
-			<button onClick="basic6()">Check</button>
-			<span id="basic6result"></span>
+		<li id="ex3"></li>
+		<li id="ex4"></li>
+		<li id="ex5"></li>
+		<li id="ex6">
+			<input type="text" id="ex6input" placeholder="input a year"></input>
+			<button onClick="ex6()">Check</button>
+			<span id="ex6result"></span>
 			</li>
-		<li id="basic7"></li>
-		<li id="basic8">
-			<input type="text" id="basic8input" placeholder="guess the number!"></input>
-			<button onClick="basic8()">Check</button>
-			<span id="basic8result"></span>
+		<li id="ex7"></li>
+		<li id="ex8">
+			<input type="text" id="ex8input" placeholder="guess the number!"></input>
+			<button onClick="ex8()">Check</button>
+			<span id="ex8result"></span>
 			</li>
-		<li id="basic9"></li>
-		<li id="basic10">
-			<input type="number" id="basic10input1" placeholder="A"></input>
-			<input type="number" id="basic10input2" placeholder="B"></input>
-			<button onClick="basic10('multiply')">Multiply</button>
-			<button onClick="basic10('divide')">Divide</button>
-			<span id="basic10result"></span>
+		<li id="ex9"></li>
+		<li id="ex10">
+			<input type="number" id="ex10input1" placeholder="A"></input>
+			<input type="number" id="ex10input2" placeholder="B"></input>
+			<button onClick="ex10('multiply')">Multiply</button>
+			<button onClick="ex10('divide')">Divide</button>
+			<span id="ex10result"></span>
 			</li>
-		<li id="basic11"></li>
+		<li id="ex11">
+			<input type="number" id="ex11input"></input>
+			<button onClick="ex11()">Calculate</button>
+			<span id="ex11result"></span>
+			</li>
+		<li id="ex12"></li>
+		<li id="ex13"></li>
+		<li id="ex14"></li>
+		<li id="ex15"></li>
+		<li id="ex16"></li>
+		<li id="ex17"></li>
+		<li id="ex18"></li>
+		<li id="ex19"></li>
+		<li id="ex20"></li>
 		
 	</ol>
 
@@ -60,16 +73,16 @@
 
 <script>
 
-	$("#basic1").html(basic1());
-	$("#basic3").html(basic3());
-	$("#basic4").html(basic4(5,6,7));
-	$("#basic5").html(basic5("w3resources"));
-	$("#basic7").html(basic7());
-	$("#basic9").html(basic9());
-	$("#basic10").html(basic10());
+	$("#ex1").html(ex1());
+	$("#ex3").html(ex3());
+	$("#ex4").html(ex4(5,6,7));
+	$("#ex5").html(ex5("w3resources"));
+	$("#ex7").html(ex7());
+	$("#ex9").html(ex9());
+	$("#ex10").html(ex10());
+	$("#ex12").html(ex12());
 	
-	
-	function basic1(){
+	function ex1(){
 		var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 		var today = new Date();
 		var day = days[today.getDay()];
@@ -92,11 +105,11 @@
 		return result;
 	}
 	
-	function basic2(){
+	function ex2(){
 		window.print();
 	}
 	
-	function basic3(){
+	function ex3(){
 		var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 		var today = new Date();
 		var day = today.getDate();
@@ -112,12 +125,12 @@
 		return result;
 	}
 	
-	function basic4(a,b,c){
+	function ex4(a,b,c){
 		var result = (a + b + c)/2;
 		return result;	
 	}
 	
-	function basic5(str){
+	function ex5(str){
 		var result = "";
 		for(var i=str.length;i>=0;i--){
 			result = result + str.charAt(i);
@@ -125,8 +138,8 @@
 		return result;
 	}
 	
-	function basic6(){
-		var input = $("#basic6input").val();
+	function ex6(){
+		var input = $("#ex6input").val();
 		var patt = new RegExp("^[0-9]{4}");
 		var res = patt.test(input);
 		var response = "";
@@ -147,11 +160,11 @@
 		} else if (res == false){
 			response = "please enter a valid year.";
 		}
-		$("#basic6result").html(response);
+		$("#ex6result").html(response);
 		
 	}
 	
-	function basic7(){
+	function ex7(){
 		var result = "";
 		var firstYear = 2014;
 		var lastYear = 2050;
@@ -166,18 +179,18 @@
 		}
 	}
 	
-	function basic8(){
-		var input = $("#basic8input").val();
+	function ex8(){
+		var input = $("#ex8input").val();
 		var number = Math.floor((Math.random() * 10) + 1);
 		console.log("Excercise #8 - The number is " + number);
 		if (input == number){
-			$("#basic8result").html("Great job!");
+			$("#ex8result").html("Great job!");
 		} else {
-			$("#basic8result").html("No dice! try again!");
+			$("#ex8result").html("No dice! try again!");
 		}
 	}
 
-	function basic9(){
+	function ex9(){
 		var today = new Date();
 		var thisYear = today.getFullYear();
 		var christmas = new Date(thisYear,11,25);
@@ -186,19 +199,26 @@
 		return result;
 	}
 	
-	function basic10(type){
+	function ex10(type){
 		var result = "";
-		var a = $("#basic10input1").val();
-		var b = $("#basic10input2").val();
+		var a = $("#ex10input1").val();
+		var b = $("#ex10input2").val();
 		if(type == "multiply"){
 			result = a * b;
 		} else if (type == "divide"){
 			result = a / b;
 		}
-		$("#basic10result").html(result);
+		$("#ex10result").html(result);
 	}
 	
-	function basic11(){
+	function ex11(){
+		var input = $("#ex11input").val();
+		var result = (input*1.8) + 32;
+		$("#ex11result").html(result);
+	}
+	
+	function ex12(){
+		return window.location.href;
 	}
 
 </script>
